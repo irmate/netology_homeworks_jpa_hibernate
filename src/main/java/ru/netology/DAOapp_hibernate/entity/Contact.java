@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class Contact implements Serializable {
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String surname;
     @Column(nullable = false)
     private int age;

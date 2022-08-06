@@ -1,19 +1,19 @@
 package ru.netology.DAOapp_hibernate.service;
 
-import org.springframework.stereotype.Service;
-import ru.netology.DAOapp_hibernate.repository.AppRepository;
+import ru.netology.DAOapp_hibernate.entity.Person;
 
 import java.util.List;
 
-@Service
-public class AppService {
-    private final AppRepository appRepository;
+public interface AppService {
+    List<Person> getPersons();
 
-    public AppService(AppRepository appRepository){
-        this.appRepository=appRepository;
-    }
+    Person createOrUpdatePerson(Person person);
 
-    public List getPersonsByCity(String city) {
-        return appRepository.getPersonsByCity(city);
-    }
+    List<Person> getPersonByCity(String city);
+
+    void deletePerson(String name, String surname);
+
+    Person getPersonByNameAndSurname(String name, String surname);
+
+    List<Person> getPersonLessThanAge(int age);
 }
