@@ -13,11 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PersonRepository extends JpaRepository<Person, Contact> {
-    List<Person> findByCityOfLivingLikeIgnoreCase(@NonNull String cityOfLiving);
+    @Query("select p from Person p where upper(p.cityOfLiving) like upper(:cityOfLiving)")
+    List<Person> findByCityOfLivingLikeIgnoreCase(@Param("cityOfLiving") @NonNull String cityOfLiving);
 
-    List<Person> findByContact_AgeLessThanOrderByContact_AgeAsc(int age);
+    @Query("select p from Person p where p.contact.age < :age order by p.contact.age")
+    List<Person> findByContact_AgeLessThanOrderByContact_AgeAsc(@Param("age") int age);
 
-    Optional<Person> findByContact_NameAndContact_Surname(@NonNull String name, @NonNull String surname);
+    @Query("select p from Person p where p.contact.name = :name and p.contact.surname = :surname")
+    Optional<Person> findByContact_NameAndContact_Surname(@Param("name") @NonNull String name, @Param("surname") @NonNull String surname);
 
     @Transactional
     @Modifying
