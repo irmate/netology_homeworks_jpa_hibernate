@@ -24,19 +24,19 @@ public class AppController {
         return new ResponseEntity<>(persons, HttpStatus.OK);
     }
 
-    @PostMapping("/persons")
+    @PostMapping("/persons/create")
     public ResponseEntity<Person> create(@RequestBody Person person) {
         var newPerson = appServiceImpl.createOrUpdatePerson(person);
         return new ResponseEntity<>(newPerson, HttpStatus.OK);
     }
 
-    @PutMapping("/persons")
+    @PutMapping("/persons/update")
     public ResponseEntity<Person> update(@RequestBody Person person) {
         var updatedPerson = appServiceImpl.createOrUpdatePerson(person);
         return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
     }
 
-    @DeleteMapping("/persons")
+    @DeleteMapping("/persons/delete")
     public ResponseEntity<String> delete(@PathParam("name") String name, @PathParam("surname") String surname) {
         appServiceImpl.deletePerson(name, surname);
         return new ResponseEntity<>("Success", HttpStatus.OK);
